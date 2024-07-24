@@ -2,6 +2,7 @@ import "./App.css";
 import ContactList from "../ContactList/ContactList";
 import SearchBox from "../SearchBox/SearchBox";
 import { useState } from "react";
+import ContactForm from "../ContactForm/ContactForm";
 
 function App() {
   const [contacts, setContacts] = useState([
@@ -13,11 +14,11 @@ function App() {
 
   const [filter, setFilter] = useState("");
 
-  // const addContact = (newContact) => {
-  //   setContacts((prevContList) => {
-  //     return [...prevContList, newContact];
-  //   });
-  // };
+  const addContact = (newContact) => {
+    setContacts((prevContList) => {
+      return [...prevContList, newContact];
+    });
+  };
 
   const handleDelete = (contactId) => {
     setContacts((prevContList) => {
@@ -32,6 +33,7 @@ function App() {
   return (
     <div>
       <h1>Phonebook</h1>
+      <ContactForm onAdd={addContact}/>
       <SearchBox value={filter} onFilter={setFilter} />
       <ContactList contacts={filterContacts} onDelete={handleDelete} />
     </div>
