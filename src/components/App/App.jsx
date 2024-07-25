@@ -1,7 +1,7 @@
 import "./App.css";
 import ContactList from "../ContactList/ContactList";
 import SearchBox from "../SearchBox/SearchBox";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ContactForm from "../ContactForm/ContactForm";
 
 function App() {
@@ -30,10 +30,14 @@ function App() {
     contact.name.toLowerCase().includes(filter.toLowerCase())
   );
 
+  useEffect(() => {
+    localStorage.setItem("contacts", JSON.stringify(contacts));
+  }, [contacts]);
+
   return (
     <div>
       <h1>Phonebook</h1>
-      <ContactForm onAdd={addContact}/>
+      <ContactForm onAdd={addContact} />
       <SearchBox value={filter} onFilter={setFilter} />
       <ContactList contacts={filterContacts} onDelete={handleDelete} />
     </div>
